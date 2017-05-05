@@ -1,3 +1,9 @@
+PATH
+  remote: jekyll-theme-editorial
+  specs:
+    jekyll-theme-editorial (0.1.0)
+      jekyll (~> 3.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,8 +41,6 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
     mercenary (0.3.6)
-    minima (2.1.1)
-      jekyll (~> 3.3)
     multi_json (1.12.1)
     pathutil (0.14.0)
       forwardable-extended (~> 2.6)
@@ -72,7 +76,7 @@ DEPENDENCIES
   jekyll (= 3.4.3)
   jekyll-admin
   jekyll-feed (~> 0.6)
-  minima (~> 2.0)
+  jekyll-theme-editorial!
   tzinfo-data
 
 RUBY VERSION
