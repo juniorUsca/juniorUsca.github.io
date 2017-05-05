@@ -10,7 +10,8 @@ timezone: America/Lima
 twitter_username: jekyllrb
 github_username: juniorUsca
 markdown: kramdown
-theme: minima
+#theme: minima
+theme: jekyll-theme-editorial
 gems:
 - jekyll-feed
 exclude:
