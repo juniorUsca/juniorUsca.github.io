@@ -23,8 +23,8 @@ layout: default
       </ul>
     </header>
 
-    {% if page.image %}
-      <span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+    {% if page.image != "no_image" %}
+      <span class="image main"><img src="{{ page.image }}" alt="{{ page.title | escape }}" /></span>
     {% endif %}
 
     <div class="post-content" itemprop="articleBody">
