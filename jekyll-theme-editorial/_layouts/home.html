@@ -95,7 +95,7 @@ layout: default
 <!-- Section -->
   <section>
     <header class="major">
-      <h2>Ultimos Posts</h2>
+      <a href="{% link blog.md %}"><h2>Ultimos Posts</h2></a>
     </header>
     <div class="posts">
       {% for post in site.posts offset:1 limit:6 %}
