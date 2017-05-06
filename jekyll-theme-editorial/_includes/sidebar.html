@@ -1,0 +1,93 @@
+<!-- Sidebar -->
+  <div id="sidebar">
+    <div class="inner">
+
+      <!-- Search -->
+        <section id="search" class="alt">
+          <form method="post" action="#">
+            <input type="text" name="query" id="query" placeholder="Buscar..." />
+          </form>
+        </section>
+
+      <!-- Menu -->
+		<nav id="menu">
+	      <header class="major">
+            <h2>Menu</h2>
+          </header>
+          <ul>
+            <li><a href="{{ "/" | relative_url }}">Inicio</a></li>
+            {% assign default_paths = site.pages | map: "path" %}
+            {% assign page_paths = site.header_pages | default: default_paths %}
+
+            {% for path in page_paths %}
+              {% assign my_page = site.pages | where: "path", path | first %}
+              {% if my_page.title %}
+                <li><a href="{{ my_page.url | relative_url}}">{{ my_page.title }}</a></li>
+              {% endif %}
+            {% endfor %}
+            <!--
+               - <li>
+               -   <span class="opener">Submenu</span>
+               -   <ul>
+               -     <li><a href="#">Lorem Dolor</a></li>
+               -     <li><a href="#">Ipsum Adipiscing</a></li>
+               -     <li><a href="#">Tempus Magna</a></li>
+               -     <li><a href="#">Feugiat Veroeros</a></li>
+               -   </ul>
+               - </li>
+               -->
+          </ul>
+        </nav>
+
+      <!-- Section -->
+        <!--
+           - <section>
+           -   <header class="major">
+           -     <h2>Ante interdum</h2>
+           -   </header>
+           -   <div class="mini-posts">
+           -     <article>
+           -       <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+           -       <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+           -     </article>
+           -     <article>
+           -       <a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+           -       <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+           -     </article>
+           -     <article>
+           -       <a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+           -       <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+           -     </article>
+           -   </div>
+           -   <ul class="actions">
+           -     <li><a href="#" class="button">More</a></li>
+           -   </ul>
+           - </section>
+           -->
+
+      <!-- Section -->
+        <section>
+          <header class="major">
+            <h2>Contactar</h2>
+          </header>
+          <p></p>
+          <ul class="contact">
+            {% if site.email %}
+            <li class="fa-envelope-o"><a href="mailto:{{ site.email }}?Subject=Hi">{{ site.email }}</a></li>
+            {% endif %}
+            {% if site.phone %}
+            <li class="fa-phone">{{ site.phone }}</li>
+            {% endif %}
+            {% if site.address %}
+            <li class="fa-home">{{ site.address | newline_to_br }}</li>
+            {% endif %}
+          </ul>
+        </section>
+
+      <!-- Footer -->
+        <footer id="footer">
+          <p class="copyright">&copy; Junior Usca. All rights reserved. Modified by <a href="{{ "/" | relative_url}}">me</a>, Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a>.</p>
+        </footer>
+
+    </div>
+  </div>
