@@ -22,7 +22,7 @@ layout: default
         </ul>
       </div>
       <span class="image object">
-        <img src="images/pic10.jpg" alt="" />
+        <a href="{{ post.url | relative_url }}"><img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}" /></a>
       </span>
     {% endif %}
   </section>
@@ -98,13 +98,13 @@ layout: default
       <h2>Ultimos Posts</h2>
     </header>
     <div class="posts">
-      {% for post in site.posts offset:1 limit:12 %}
+      {% for post in site.posts offset:1 limit:6 %}
         <article>
-          <a href="{{ post.url | relative_url }}" class="image"><img src="images/pic01.jpg" alt="" /></a>
+          <a href="{{ post.url | relative_url }}" class="image"><img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}" /></a>
           <h3>{{ post.title | escape }}</h3>
-          <p>{{ post.excerpt | strip_html | truncate: 183 }}</p>
           {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
           <span class="post-meta">{{ post.date | date: date_format }}</span>
+          <p>{{ post.excerpt | strip_html | truncate: 183 }}</p>
           <ul class="actions">
             <li><a href="{{ post.url | relative_url }}" class="button">Ver más</a></li>
           </ul>

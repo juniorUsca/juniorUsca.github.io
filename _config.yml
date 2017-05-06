@@ -16,8 +16,16 @@ encoding: utf-8
 timezone: America/Lima
 markdown: kramdown
 theme: jekyll-theme-editorial
+# paginator configs
+paginate: 3
+paginate_first_path: "/blog/"
+paginate_path: "/blog/page:num/"
+# auto-images configs
+image: /images/default.jpg
 gems:
 - jekyll-feed
+- jekyll-paginate
+- jekyll-auto-image
 exclude:
 - Gemfile
 - Gemfile.lock

@@ -29,3 +29,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Admin gem
 gem 'jekyll-admin', group: :jekyll_plugins
+
+# Pagination gem
+gem 'jekyll-paginate'
+
+# First image gem
+gem 'jekyll-auto-image'
