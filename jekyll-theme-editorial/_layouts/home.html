@@ -1,0 +1,123 @@
+---
+layout: default
+---
+
+{{ content }}
+
+<!-- Banner -->
+  <section id="banner">
+    {% assign posts_size = site.posts | size | minus:1 %}
+    {% assign post = site.posts[ posts_size ] %}
+    {% assign post = site.posts | first %}
+    {% if post %}
+      <div class="content">
+        <header>
+          <h1>{{ post.title | escape }}</h1>
+          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+          <p>{{ post.date | date: date_format }}</p>
+        </header>
+        <p>{{ post.excerpt | strip_html | remove: '<p>' | remove: '</p>' }}</p>
+        <ul class="actions">
+          <li><a href="{{ post.url | relative_url }}" class="button big">Ver más</a></li>
+        </ul>
+      </div>
+      {% if post.image != "no_image" %}
+        <span class="image object">
+          <a href="{{ post.url | relative_url }}"><img src="{{ post.image }}" alt="{{ post.title | escape }}" /></a>
+        </span>
+      {% endif %}
+    {% endif %}
+  </section>
+
+<!-- Section -->
+  <section>
+    <header class="major">
+      <h2>Mis habilidades</h2>
+    </header>
+    <div class="features">
+      <article>
+        <span class="icon devicon devicon-cplusplus-plain"></span>
+        <div class="content">
+          <h3>C++</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-nodejs-plain"></span>
+        <div class="content">
+          <h3>Node JS</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-python-plain"></span>
+        <div class="content">
+          <h3>Python</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-amazonwebservices-plain"></span>
+        <div class="content">
+          <h3>DevOS</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-android-plain"></span>
+        <div class="content">
+          <h3>Andoird</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-angularjs-plain"></span>
+        <div class="content">
+          <h3>Angular JS</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-docker-plain"></span>
+        <div class="content">
+          <h3>Docker</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-git-plain"></span>
+        <div class="content">
+          <h3>Git</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+<!-- Section -->
+  <section>
+    <header class="major">
+      <a href="{% link blog.md %}"><h2>Ultimos Posts</h2></a>
+    </header>
+    <div class="posts">
+      {% for post in site.posts offset:1 limit:6 %}
+        <article>
+          {% if post.image != "no_image" %}
+            <a href="{{ post.url | relative_url }}" class="image"><img src="{{ post.image }}" alt="{{ post.title | escape }}" /></a>
+          {% endif %}
+          <h3>{{ post.title | escape }}</h3>
+          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+          <span class="post-meta">{{ post.date | date: date_format }}</span>
+          <p>{{ post.excerpt | strip_html | truncate: 183 }}</p>
+          <ul class="actions">
+            <li><a href="{{ post.url | relative_url }}" class="button">Ver más</a></li>
+          </ul>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section>
+    <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
+  </section>
+
