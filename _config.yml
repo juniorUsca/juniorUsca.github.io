@@ -1,19 +1,24 @@
 ---
-title: Junior Usca Blog
-email: your-email@domain.com
+title: Junior Usca
+email: junior.usca@gmail.com
+phone: "(+51) 935 088 511"
+address: |
+  Arequipa - Perú
+  J.L.B. y Ribero
+twitter_username: 
+facebook_username: junior.usca
+github_username: juniorUsca
 description: |
   Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 baseurl: ''
-url: ''
+url: localhost:4000
 encoding: utf-8
 timezone: America/Lima
-twitter_username: jekyllrb
-github_username: juniorUsca
 markdown: kramdown
-#theme: minima
 theme: jekyll-theme-editorial
 gems:
 - jekyll-feed
 exclude:
 - Gemfile
 - Gemfile.lock
+- html5up-editorial

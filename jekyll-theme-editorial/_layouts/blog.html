@@ -1,0 +1,49 @@
+---
+layout: default
+---
+
+{{ content }}
+
+<!-- Banner -->
+  <section id="banner">
+    {% assign posts_size = site.posts | size | minus:1 %}
+    {% assign post = site.posts[ posts_size ] %}
+    {% assign post = site.posts | first %}
+    {% if post %}
+      <div class="content">
+        <header>
+          <h1>{{ post.title | escape }}</h1>
+          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+          <p>{{ post.date | date: date_format }}</p>
+        </header>
+        <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' }}</p>
+        <ul class="actions">
+          <li><a href="{{ post.url | relative_url }}" class="button big">Ver más</a></li>
+        </ul>
+      </div>
+      <span class="image object">
+        <img src="images/pic10.jpg" alt="" />
+      </span>
+    {% endif %}
+  </section>
+
+<!-- Section -->
+  <section>
+    <header class="major">
+      <h2>Posts</h2>
+    </header>
+    <div class="posts">
+      {% for post in site.posts offset:1 %}
+        <article>
+          <a href="{{ post.url | relative_url }}" class="image"><img src="images/pic01.jpg" alt="" /></a>
+          <h3>{{ post.title | escape }}</h3>
+          <p>{{ post.excerpt | strip_html | truncate: 183 }}</p>
+          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+          <span class="post-meta">{{ post.date | date: date_format }}</span>
+          <ul class="actions">
+            <li><a href="{{ post.url | relative_url }}" class="button">Ver más</a></li>
+          </ul>
+        </article>
+      {% endfor %}
+    </div>
+  </section>

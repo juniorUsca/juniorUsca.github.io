@@ -34,12 +34,25 @@
 
 <!-- Header -->
   <header id="header">
-    <a href="index.html" class="logo">Blog de <strong>Junior Usca Huacasi</strong></a>
+    <a href="{{ "/" | relative_url }}" class="logo"><strong>{{ site.title }}</strong> Blog</a>
       <ul class="icons">
-        <li><a href="#" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-        <li><a href="https://www.facebook.com/junior.usca" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-        <!-- <li><a href="#" target="_blank" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li> -->
-        <!-- <li><a href="#" target="_blank" class="icon fa-instagram"><span class="label">Instagram</span></a></li> -->
-        <!-- <li><a href="#" target="_blank" class="icon fa-medium"><span class="label">Medium</span></a></li> -->
+        {% if site.github_username %}
+        <li><a href="https://www.github.com/{{ site.github_username }}" target="_blank" class="icon fa-github"><span class="label">Github</span></a></li>
+        {% endif %}
+        {% if site.twitter_username %}
+        <li><a href="https://www.twitter.com/{{ site.twitter_username }}" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+        {% endif %}
+        {% if site.facebook_username %}
+        <li><a href="https://www.facebook.com/{{ site.facebook_username }}" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+        {% endif %}
+        {% if site.snapchat_username %}
+        <li><a href="https://www.snapchat.com/{{ site.snapchat_username }}" target="_blank" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+        {% endif %}
+        {% if site.instagram_username %}
+        <li><a href="https://www.instagram.com/{{ site.instagram_username }}" target="_blank" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+        {% endif %}
+        {% if site.medium_username %}
+        <li><a href="https://www.medium.com/{{ site.medium_username }}" target="_blank" class="icon fa-medium"><span class="label">Medium</span></a></li>
+        {% endif %}
       </ul>
   </header>

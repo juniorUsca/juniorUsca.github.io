@@ -30,10 +30,75 @@ layout: default
 <!-- Section -->
   <section>
     <header class="major">
-      <h2>Posts</h2>
+      <h2>Mis habilidades</h2>
+    </header>
+    <div class="features">
+      <article>
+        <span class="icon devicon devicon-cplusplus-plain"></span>
+        <div class="content">
+          <h3>C++</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-nodejs-plain"></span>
+        <div class="content">
+          <h3>Node JS</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-python-plain"></span>
+        <div class="content">
+          <h3>Python</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-amazonwebservices-plain"></span>
+        <div class="content">
+          <h3>DevOS</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-android-plain"></span>
+        <div class="content">
+          <h3>Andoird</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-angularjs-plain"></span>
+        <div class="content">
+          <h3>Angular JS</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-docker-plain"></span>
+        <div class="content">
+          <h3>Docker</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+      <article>
+        <span class="icon devicon devicon-git-plain"></span>
+        <div class="content">
+          <h3>Git</h3>
+          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+<!-- Section -->
+  <section>
+    <header class="major">
+      <h2>Ultimos Posts</h2>
     </header>
     <div class="posts">
-      {% for post in site.posts offset:1 %}
+      {% for post in site.posts offset:1 limit:12 %}
         <article>
           <a href="{{ post.url | relative_url }}" class="image"><img src="images/pic01.jpg" alt="" /></a>
           <h3>{{ post.title | escape }}</h3>
@@ -45,43 +110,6 @@ layout: default
           </ul>
         </article>
       {% endfor %}
-    </div>
-  </section>
-
-  <!-- Section -->
-  <section>
-    <header class="major">
-      <h2>Erat lacinia</h2>
-    </header>
-    <div class="features">
-      <article>
-        <span class="icon fa-diamond"></span>
-        <div class="content">
-          <h3>Portitor ullamcorper</h3>
-          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-        </div>
-      </article>
-      <article>
-        <span class="icon fa-paper-plane"></span>
-        <div class="content">
-          <h3>Sapien veroeros</h3>
-          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-        </div>
-      </article>
-      <article>
-        <span class="icon fa-rocket"></span>
-        <div class="content">
-          <h3>Quam lorem ipsum</h3>
-          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-        </div>
-      </article>
-      <article>
-        <span class="icon fa-signal"></span>
-        <div class="content">
-          <h3>Sed magna finibus</h3>
-          <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
-        </div>
-      </article>
     </div>
   </section>
 
