@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
-  <title>Welcome to Jekyll!</title>
-  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
+  <title>Configurar VirtualBox para ingresar con SSH e IP estatica</title>
+  <meta name="description" content="Configuraremos una IP estatica para una maquina virtual linux y de esta forma poder acceder a ella desde una maquina local. Suponemos que ya se instalo linux.">
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 
   <!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -15,7 +15,7 @@
   <!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
   <!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
 
-  <link rel="canonical" href="http://localhost:4000/jekyll/update/2017/05/05/welcome-to-jekyll.html">
+  <link rel="canonical" href="http://localhost:4000/2016/11/08/configurar-virtualbox-para-ingresar-con-ssh-e-ip-estatica.html">
   <link rel="alternate" type="application/rss+xml" title="Junior Usca" href="/feed.xml">
 
   
@@ -118,12 +118,12 @@
               <!-- Content -->
   <section itemscope itemtype="http://schema.org/BlogPosting">
     <header class="main">
-      <h1 itemprop="name headline">Welcome to Jekyll!</h1>
+      <h1 itemprop="name headline">Configurar VirtualBox para ingresar con SSH e IP estatica</h1>
       <ul>
         <li>
-          <time datetime="2017-05-05T04:30:00-05:00" itemprop="datePublished">
+          <time datetime="2016-11-08T12:00:00-05:00" itemprop="datePublished">
             
-            May 5, 2017
+            Nov 8, 2016
           </time>
         </li>
         
@@ -131,24 +131,88 @@
     </header>
 
     
-      <span class="image main"><img src="https://cdn-images-1.medium.com/max/2000/1*WKgZlNbW_lxOquNDPvKGuA.jpeg" alt="Welcome to Jekyll!" /></span>
+      
     
 
     <div class="post-content" itemprop="articleBody">
-      <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+      <p>Configuraremos una IP estatica para una maquina virtual linux y de esta forma poder acceder a ella desde una maquina local. Suponemos que ya se instalo linux.</p>
 
-<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<h3 id="configurando-una-ip-estatica-a-una-maquina-virtual">Configurando una IP estatica a una maquina virtual:</h3>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<p>La ip que configuraremos sera: 192.168.1.240</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<p>Apagamos la maquina virtual Virtual Box</p>
 
-<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+<p>Ingresamos a configuracion y red, habilitamos el <strong>adaptador 2</strong> como se ve en la iamgen:</p>
 
+<p><img src="https://raw.githubusercontent.com/juniorUsca/tutoriales/master/maquina%20virtual/ipstatica-ssh/imgs/vbox_adapter2.png" alt="Image 1" /></p>
+
+<p>Encendemos la maquina virtual</p>
+
+<h4 id="verificamos-lo-adaptadores-de-red">Verificamos lo adaptadores de red</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ls /sys/class/net
+</code></pre>
+</div>
+
+<p>Deberia de aparecer 3 redes, 2 de los adaptadores y la otra de localhost</p>
+
+<h4 id="editamos-las-interfaces-de-red">Editamos las interfaces de red</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo vim /etc/network/interfaces
+</code></pre>
+</div>
+
+<p>Dependiendo del nombre del <strong>adaptador 2</strong> que creamos previamente, agregamos lo siguiente, en nuestro caso en nombre es <strong>eth1</strong>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>auto eth1
+iface eth1 inet static
+  address 192.168.56.10
+  netmask 255.255.255.0
+</code></pre>
+</div>
+
+<p>Activamos la red con:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo ifup eth1
+</code></pre>
+</div>
+
+<h3 id="configurando-ssh-en-una-maquina-virtual">Configurando SSH en una maquina virtual:</h3>
+
+<h4 id="instalamos-ssh-en-la-maquina-virtual">Instalamos SSH en la maquina virtual</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install openssh-server
+</code></pre>
+</div>
+
+<h4 id="verificamos-la-coneccion-desde-cualquier-otra-maquina-en-la-misma-red">Verificamos la coneccion desde cualquier otra maquina en la misma red</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ping 192.168.56.10
+</code></pre>
+</div>
+
+<h4 id="para-ingresar-por-ssh-a-la-maquina-configurada-usamos-desde-cualquier-otra-maquina-en-la-misma-red">Para ingresar por ssh a la maquina configurada usamos desde cualquier otra maquina en la misma red</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ssh &lt;usernam&gt;@192.168.56.10
+</code></pre>
+</div>
+
+<h2 id="errores-comunes">Errores comunes</h2>
+<h3 id="si-no-hace-ping-a-la-maquina-virtual-asegurate-que-este-levantado-en-tu-maquina-host">Si no hace ping a la maquina virtual, asegurate que este levantado en tu maquina HOST</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo ifconfig vboxnet0 up
+$ ifconfig
+</code></pre>
+</div>
+
+<h3 id="si-no-conecta-a-la-maquina-virtual-y-no-tienes-ip-aplicar-en-tu-host">Si no conecta a la maquina virtual y no tienes ip, aplicar en tu HOST:</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo ifconfig vboxnet0 192.168.56.1
+$ ifconfig
+</code></pre>
+</div>
+
+<h3 id="referencias">Referencias:</h3>
+
+<ul>
+  <li><a href="https://muffinresearch.co.uk/howto-ssh-into-virtualbox-3-linux-guests">https://muffinresearch.co.uk/howto-ssh-into-virtualbox-3-linux-guests</a></li>
+  <li><a href="http://askubuntu.com/questions/293816/in-virtualbox-how-do-i-set-up-host-only-virtual-machines-that-can-access-the-in">http://askubuntu.com/questions/293816/in-virtualbox-how-do-i-set-up-host-only-virtual-machines-that-can-access-the-in</a></li>
+  <li><a href="http://slopjong.de/2013/05/14/virtualbox-make-your-virtual-machine-accessible-from-your-host-system-but-not-from-the-local-network">http://slopjong.de/2013/05/14/virtualbox-make-your-virtual-machine-accessible-from-your-host-system-but-not-from-the-local-network</a></li>
+</ul>
 
     </div>
 

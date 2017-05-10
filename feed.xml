@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-06T18:20:38-05:00</updated><id>http://localhost:4000/</id><title type="html">Junior Usca</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-05-10T07:03:24-05:00</updated><id>http://localhost:4000/</id><title type="html">Junior Usca</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 </subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2017/05/05/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2017-05-05T04:30:00-05:00</published><updated>2017-05-05T04:30:00-05:00</updated><id>http://localhost:4000/jekyll/update/2017/05/05/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2017/05/05/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
 &lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
@@ -11,4 +11,81 @@
 &lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://cdn-images-1.medium.com/max/2000/1*WKgZlNbW_lxOquNDPvKGuA.jpeg" /></entry></feed>
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://cdn-images-1.medium.com/max/2000/1*WKgZlNbW_lxOquNDPvKGuA.jpeg" /></entry><entry><title type="html">Configurar VirtualBox para ingresar con SSH e IP estatica</title><link href="http://localhost:4000/2016/11/08/configurar-virtualbox-para-ingresar-con-ssh-e-ip-estatica.html" rel="alternate" type="text/html" title="Configurar VirtualBox para ingresar con SSH e IP estatica" /><published>2016-11-08T12:00:00-05:00</published><updated>2016-11-08T12:00:00-05:00</updated><id>http://localhost:4000/2016/11/08/configurar-virtualbox-para-ingresar-con-ssh-e-ip-estatica</id><content type="html" xml:base="http://localhost:4000/2016/11/08/configurar-virtualbox-para-ingresar-con-ssh-e-ip-estatica.html">&lt;p&gt;Configuraremos una IP estatica para una maquina virtual linux y de esta forma poder acceder a ella desde una maquina local. Suponemos que ya se instalo linux.&lt;/p&gt;
+
+&lt;h3 id=&quot;configurando-una-ip-estatica-a-una-maquina-virtual&quot;&gt;Configurando una IP estatica a una maquina virtual:&lt;/h3&gt;
+
+&lt;p&gt;La ip que configuraremos sera: 192.168.1.240&lt;/p&gt;
+
+&lt;p&gt;Apagamos la maquina virtual Virtual Box&lt;/p&gt;
+
+&lt;p&gt;Ingresamos a configuracion y red, habilitamos el &lt;strong&gt;adaptador 2&lt;/strong&gt; como se ve en la iamgen:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/juniorUsca/tutoriales/master/maquina%20virtual/ipstatica-ssh/imgs/vbox_adapter2.png&quot; alt=&quot;Image 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Encendemos la maquina virtual&lt;/p&gt;
+
+&lt;h4 id=&quot;verificamos-lo-adaptadores-de-red&quot;&gt;Verificamos lo adaptadores de red&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ls /sys/class/net
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Deberia de aparecer 3 redes, 2 de los adaptadores y la otra de localhost&lt;/p&gt;
+
+&lt;h4 id=&quot;editamos-las-interfaces-de-red&quot;&gt;Editamos las interfaces de red&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo vim /etc/network/interfaces
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Dependiendo del nombre del &lt;strong&gt;adaptador 2&lt;/strong&gt; que creamos previamente, agregamos lo siguiente, en nuestro caso en nombre es &lt;strong&gt;eth1&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;auto eth1
+iface eth1 inet static
+  address 192.168.56.10
+  netmask 255.255.255.0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Activamos la red con:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo ifup eth1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;configurando-ssh-en-una-maquina-virtual&quot;&gt;Configurando SSH en una maquina virtual:&lt;/h3&gt;
+
+&lt;h4 id=&quot;instalamos-ssh-en-la-maquina-virtual&quot;&gt;Instalamos SSH en la maquina virtual&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo apt-get install openssh-server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;verificamos-la-coneccion-desde-cualquier-otra-maquina-en-la-misma-red&quot;&gt;Verificamos la coneccion desde cualquier otra maquina en la misma red&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ping 192.168.56.10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;para-ingresar-por-ssh-a-la-maquina-configurada-usamos-desde-cualquier-otra-maquina-en-la-misma-red&quot;&gt;Para ingresar por ssh a la maquina configurada usamos desde cualquier otra maquina en la misma red&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ ssh &amp;lt;usernam&amp;gt;@192.168.56.10
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;errores-comunes&quot;&gt;Errores comunes&lt;/h2&gt;
+&lt;h3 id=&quot;si-no-hace-ping-a-la-maquina-virtual-asegurate-que-este-levantado-en-tu-maquina-host&quot;&gt;Si no hace ping a la maquina virtual, asegurate que este levantado en tu maquina HOST&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo ifconfig vboxnet0 up
+$ ifconfig
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;si-no-conecta-a-la-maquina-virtual-y-no-tienes-ip-aplicar-en-tu-host&quot;&gt;Si no conecta a la maquina virtual y no tienes ip, aplicar en tu HOST:&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ sudo ifconfig vboxnet0 192.168.56.1
+$ ifconfig
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;referencias&quot;&gt;Referencias:&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://muffinresearch.co.uk/howto-ssh-into-virtualbox-3-linux-guests&quot;&gt;https://muffinresearch.co.uk/howto-ssh-into-virtualbox-3-linux-guests&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://askubuntu.com/questions/293816/in-virtualbox-how-do-i-set-up-host-only-virtual-machines-that-can-access-the-in&quot;&gt;http://askubuntu.com/questions/293816/in-virtualbox-how-do-i-set-up-host-only-virtual-machines-that-can-access-the-in&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://slopjong.de/2013/05/14/virtualbox-make-your-virtual-machine-accessible-from-your-host-system-but-not-from-the-local-network&quot;&gt;http://slopjong.de/2013/05/14/virtualbox-make-your-virtual-machine-accessible-from-your-host-system-but-not-from-the-local-network&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Configuraremos una IP estatica para una maquina virtual linux y de esta forma poder acceder a ella desde una maquina local. Suponemos que ya se instalo linux.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://raw.githubusercontent.com/juniorUsca/tutoriales/master/maquina%20virtual/ipstatica-ssh/imgs/vbox_adapter2.png" /></entry></feed>
