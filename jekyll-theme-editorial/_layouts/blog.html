@@ -48,7 +48,9 @@ layout: default
       {% endif %}
       {% for post in paginator.posts offset:off_set %}
         <article>
-          {% if post.image != "no_image" %}
+          {% if post.image == "no_image" %}
+            <a href="{{ post.url | relative_url }}" class="image"><img src="{{ site.image }}" alt="{{ post.title | escape }}" /></a>
+          {% else %}
             <a href="{{ post.url | relative_url }}" class="image"><img src="{{ post.image }}" alt="{{ post.title | escape }}" /></a>
           {% endif %}
           <h3>{{ post.title | escape }}</h3>

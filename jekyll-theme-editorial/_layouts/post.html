@@ -23,7 +23,11 @@ layout: default
       </ul>
     </header>
 
-    {% if page.image != "no_image" %}
+    {% if page.banner_image %}
+      {% if page.banner_image != "no_image" %}
+        <span class="image main"><img src="{{ page.banner_image }}" alt="{{ page.title | escape }}" /></span>
+      {% endif %}
+    {% else %}
       <span class="image main"><img src="{{ page.image }}" alt="{{ page.title | escape }}" /></span>
     {% endif %}
 
