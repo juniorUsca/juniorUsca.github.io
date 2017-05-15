@@ -3,6 +3,7 @@ title: Configurar VirtualBox para ingresar con SSH e IP estatica
 layout: post
 date: '2016-11-08 12:00:00'
 banner_image: no_image
+tags: maquina virtual ip estatica ssh
 ---
 
 Configuraremos una IP estatica para una maquina virtual linux y de esta forma poder acceder a ella desde una maquina local. Suponemos que ya se instalo linux.
