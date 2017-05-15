@@ -9,7 +9,8 @@
 	#main {
 		@include vendor('flex-grow', '1');
 		@include vendor('flex-shrink', '1');
-		width: 100%;
+		// width: 100%;
+        width: 0;
 
 		> .inner {
 			@include padding(0, 6em);
