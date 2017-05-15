@@ -16,7 +16,7 @@ encoding: utf-8
 timezone: America/Lima
 markdown: kramdown
 theme: jekyll-theme-editorial
-paginate: 3
+paginate: 6
 paginate_first_path: "/blog/"
 paginate_path: "/blog/page:num/"
 image: https://juniorusca.github.io/images/default.jpg
