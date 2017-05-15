@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+  <title>Instalación de Hadoop 2.7.3 en Ubuntu 14.04</title>
+  <meta name="description" content="">
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+  <!--[if lte IE 8]><script src="/assets/js/ie/html5shiv.js"></script><![endif]-->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <!--[if lte IE 9]><link rel="stylesheet" href="/assets/css/ie9.css" /><![endif]-->
+  <!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/ie8.css" /><![endif]-->
+
+  <link rel="canonical" href="http://localhost:4000/2016/11/08/instalacion-de-hadoop-273-en-ubuntu-1404.html">
+  <link rel="alternate" type="application/rss+xml" title="Junior Usca" href="/feed.xml">
+
+  
+</head>
+
+
+  <body>
+
+    <!-- Wrapper -->
+      <div id="wrapper">
+
+        <!-- Main -->
+          <div id="main">
+            <div class="inner">
+
+              <!-- <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/">Junior Usca</a>
+  
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+            <a class="page-link" href="/about/">About</a>
+            
+          
+            
+            
+            <a class="page-link" href="/blog/">Blog</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header> -->
+
+
+<!-- Header -->
+  <header id="header">
+    <a href="/" class="logo"><strong>Junior Usca</strong> Blog</a>
+      <ul class="icons">
+        
+        <li><a href="https://www.github.com/juniorUsca" target="_blank" class="icon fa-github"><span class="label">Github</span></a></li>
+        
+        
+        
+        <li><a href="https://www.facebook.com/junior.usca" target="_blank" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+        
+        
+        
+        
+      </ul>
+  </header>
+
+
+              <!-- Content -->
+  <section itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="main">
+      <h1 itemprop="name headline">Instalación de Hadoop 2.7.3 en Ubuntu 14.04</h1>
+      <ul>
+        <li>
+          <time datetime="2016-11-08T12:00:00-05:00" itemprop="datePublished">
+            
+            Nov 8, 2016
+          </time>
+        </li>
+        
+      </ul>
+    </header>
+
+    
+      
+    
+
+    <div class="post-content" itemprop="articleBody">
+      <hr />
+
+<h4 id="configurar-una-ip-estatica-a-cada-maquina">Configurar una IP estatica a cada maquina:</h4>
+
+<ul>
+  <li>Maquina Master: 192.168.1.240</li>
+  <li>Maquina Slave1: 192.168.1.241</li>
+  <li>Maquina Slave2: 192.168.1.242</li>
+  <li>Maquina Slave3: 192.168.1.243</li>
+</ul>
+
+<h4 id="instalando-java-a-cada-maquina">Instalando Java a cada maquina</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get update
+$ sudo add-apt-repository ppa:openjdk-r/ppa
+$ sudo apt-get install openjdk-8-jdk
+</code></pre>
+</div>
+<p>Verificamos la instalación de java</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ java -version
+$ javac -version
+</code></pre>
+</div>
+
+<h4 id="añadiendo-un-usuario-hadoop-a-cada-maquina">Añadiendo un usuario Hadoop a cada maquina</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo addgroup hadoop
+$ sudo adduser --ingroup hadoop hduser
+</code></pre>
+</div>
+
+<p>Damos permisos de administrador como usuario administrador</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo adduser hduser sudo
+</code></pre>
+</div>
+
+<h4 id="instalando-ssh-a-cada-maquina">Instalando SSH a cada maquina</h4>
+
+<p>ssh tiene dos principales componentes:</p>
+<blockquote>
+  <p>ssh:      Comando usado para conectar maquinas remotas.</p>
+
+  <p>sshd:   El daemon esta corriendo en el servidor y permite al cliente conectarse al servidor.</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo apt-get install ssh
+</code></pre>
+</div>
+
+<h4 id="configurar-certificados-ssh-a-cada-maquina">Configurar certificados SSH a cada maquina</h4>
+
+<p>Hadoop requiere acceso SSH para manejar los nodos, por ejemplo máquinas remotas o máquinas locales.
+Asi que necesitamos tener  SSH levantado y corriendo en nuestras maquinas.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ su - hduser
+$ ssh-keygen -t rsa -P ""
+$ cat $HOME/.ssh/id_rsa.pub &gt;&gt; $HOME/.ssh/authorized_keys
+</code></pre>
+</div>
+<p>Para probar que todo salio bien</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ssh localhost
+</code></pre>
+</div>
+<p>Habra ingresado a su propia maquina, salimos para continuar.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ exit
+</code></pre>
+</div>
+<h4 id="autorizando-conecciones-ssh">Autorizando conecciones SSH</h4>
+<p>Ejecutar en la maquina <strong>master</strong>:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.241
+$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.242
+$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.243
+</code></pre>
+</div>
+<p>Ejecutar en la maquina <strong>slave1</strong>:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.240
+$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.242
+$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.243
+</code></pre>
+</div>
+<p>Ejecutar en la maquina <strong>slave2</strong>:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.240
+$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.241
+$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.242
+</code></pre>
+</div>
+<p>Ejecutar en la maquina <strong>slave3</strong>:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.240
+$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.241
+$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@192.168.1.242
+</code></pre>
+</div>
+
+<h4 id="realizando-conecciones-ssh">Realizando conecciones SSH</h4>
+<p>Probaremos las conecciones entre las maquinas
+En cada maquina ejecutamos:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ ssh hduser@192.168.1.240
+$ exit
+$ ssh hduser@192.168.1.241
+$ exit
+$ ssh hduser@192.168.1.242
+$ exit
+$ ssh hduser@192.168.1.243
+$ exit
+</code></pre>
+</div>
+
+<h4 id="configurando-el-hostname">Configurando el hostname</h4>
+
+<p>En el <strong>master</strong>:</p>
+
+<p>Editar el archivo <strong>/etc/hostname</strong> y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>master
+</code></pre>
+</div>
+<p>Activar usando:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo hostname master
+</code></pre>
+</div>
+
+<p>En el <strong>slave1</strong>:</p>
+
+<p>Editar el archivo <strong>/etc/hostname</strong> y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>slave1
+</code></pre>
+</div>
+<p>Activar usando:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo hostname slave1
+</code></pre>
+</div>
+
+<p>En el <strong>slave2</strong>:</p>
+
+<p>Editar el archivo <strong>/etc/hostname</strong> y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>slave2
+</code></pre>
+</div>
+<p>Activar usando:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo hostname slave2
+</code></pre>
+</div>
+
+<p>En el <strong>slave3</strong>:</p>
+
+<p>Editar el archivo <strong>/etc/hostname</strong> y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>slave3
+</code></pre>
+</div>
+<p>Activar usando:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo hostname slave3
+</code></pre>
+</div>
+
+<h4 id="configurando-los-hosts-a-cada-maquina">Configurando los hosts a cada maquina:</h4>
+
+<p>Editar <strong>/etc/hosts</strong> y agregamos:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>192.168.1.240 master
+192.168.1.241 slave1
+192.168.1.242 slave2 
+192.168.1.243 slave3
+</code></pre>
+</div>
+<p>Si existe algun host con alguno de estos nombres comentarlo agregando un <strong>#</strong> delante en dicha linea</p>
+
+<h4 id="desactivando-ipv6-a-cada-maquina">Desactivando IPV6 a cada maquina</h4>
+
+<p>Lo desactivamos para no tener conflictos de coneccion en hadoop:</p>
+
+<p>Editamos el archivo <strong>/etc/sysctl.conf</strong>, agregamos al final:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># disable ipv6</span>
+net.ipv6.conf.all.disable_ipv6 <span class="o">=</span> 1
+net.ipv6.conf.default.disable_ipv6 <span class="o">=</span> 1
+net.ipv6.conf.lo.disable_ipv6 <span class="o">=</span> 1
+</code></pre>
+</div>
+<p>Ahora <strong>reiniciamos</strong> cada maquina.</p>
+
+<h4 id="instalando-hadoop-273-a-cada-maquina">Instalando Hadoop 2.7.3 a cada maquina</h4>
+
+<p>Descargar Hadoop de su página, la versión binary:</p>
+
+<p><a href="http://hadoop.apache.org/#Download+Hadoop">http://hadoop.apache.org/#Download+Hadoop</a></p>
+
+<p>Iniciamos sesion como hduser:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ su - hduser
+</code></pre>
+</div>
+<p>Descomprimimos hadoop:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd &lt;ubicacion-hadoop&gt;
+$ tar xvzf hadoop-2.7.3.tar.gz
+</code></pre>
+</div>
+<p>Moveremos la instalación de Hadoop a /opt/hadoop-2.7.3</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo mv hadoop-2.7.3 /opt/
+</code></pre>
+</div>
+
+<h4 id="configurando-hadoop-a-cada-maquina">Configurando Hadoop a cada maquina</h4>
+
+<p>Editar <strong>~/.bashrc</strong> para tener acceso a Hadoop:</p>
+
+<p>Agregamos al final lo siguiente:</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#HADOOP VARIABLES START</span>
+<span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/lib/jvm/java-8-openjdk-amd64
+<span class="nb">export </span><span class="nv">HADOOP_INSTALL</span><span class="o">=</span>/opt/hadoop-2.7.3
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HADOOP_INSTALL</span>/bin
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HADOOP_INSTALL</span>/sbin
+<span class="nb">export </span><span class="nv">HADOOP_MAPRED_HOME</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>
+<span class="nb">export </span><span class="nv">HADOOP_COMMON_HOME</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>
+<span class="nb">export </span><span class="nv">HADOOP_HDFS_HOME</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>
+<span class="nb">export </span><span class="nv">YARN_HOME</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>
+<span class="nb">export </span><span class="nv">HADOOP_COMMON_LIB_NATIVE_DIR</span><span class="o">=</span><span class="nv">$HADOOP_INSTALL</span>/lib/native
+<span class="nb">export </span><span class="nv">HADOOP_OPTS</span><span class="o">=</span><span class="s2">"-Djava.library.path=</span><span class="nv">$HADOOP_INSTALL</span><span class="s2">/lib"</span>
+<span class="c">#HADOOP VARIABLES END</span>
+</code></pre>
+</div>
+<p>Efectuamos los cambios con:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>source ~/.bashrc
+</code></pre>
+</div>
+<p>Editamos <strong>/opt/hadoop-2.7.3/etc/hadoop/hadoop-env.sh</strong> y agregamos al final</p>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/lib/jvm/java-8-openjdk-amd64
+<span class="nb">export </span><span class="nv">HADOOP_OPTS</span><span class="o">=</span>-Djava.net.preferIPv4Stack<span class="o">=</span><span class="nb">true</span> 
+</code></pre>
+</div>
+
+<p>Generamos una carpeta para datos temporales</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo mkdir -p /app/hadoop/tmp
+$ sudo chown hduser:hadoop /app/hadoop/tmp
+</code></pre>
+</div>
+<p>Editamos <strong>/opt/hadoop-2.7.3/etc/hadoop/core-site.xml</strong>, abrir el archivo y cambiar lo siguiente entre el tag <code class="highlighter-rouge">&lt;configuration&gt; &lt;/configuration&gt;</code></p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;configuration&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>hadoop.tmp.dir<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>/app/hadoop/tmp<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;description&gt;</span>A base for other temporary directories.<span class="nt">&lt;/description&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>fs.default.name<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>hdfs://master:54310<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;description&gt;</span>The name of the default file system.<span class="nt">&lt;/description&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>dfs.permissions<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre>
+</div>
+<p>Generamos carpetas para namenode y datanode</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ sudo mkdir -p /opt/hadoop-2.7.3/hadoop_store/hdfs/namenode
+$ sudo mkdir -p /opt/hadoop-2.7.3/hadoop_store/hdfs/datanode
+$ sudo chown -R hduser:hadoop /opt/hadoop-2.7.3/hadoop_store
+</code></pre>
+</div>
+<p>Editamos <strong>/opt/hadoop-2.7.3/etc/hadoop/hdfs-site.xml</strong>, abrir el archivo y cambiar lo siguiente entre el tag <code class="highlighter-rouge">&lt;configuration&gt; &lt;/configuration&gt;</code></p>
+
+<p>El factor de replicación lo pusimos en 4 por ser 4 maquinas las que trabajaran.</p>
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;configuration&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>dfs.replication<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>4<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Default block replication.<span class="nt">&lt;/description&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>dfs.permissions<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>false<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>dfs.namenode.name.dir<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>file:/opt/hadoop-2.7.3/hadoop_store/hdfs/namenode<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+   <span class="nt">&lt;name&gt;</span>dfs.datanode.data.dir<span class="nt">&lt;/name&gt;</span>
+   <span class="nt">&lt;value&gt;</span>file:/opt/hadoop-2.7.3/hadoop_store/hdfs/datanode<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre>
+</div>
+
+<p>Copiamos el archivo <strong>/opt/hadoop-2.7.3/etc/hadoop/mapred-site.xml.template</strong> y lo renombramos a <strong>/opt/hadoop-2.7.3/etc/hadoop/mapred-site.xml</strong></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>cp /opt/hadoop-2.7.3/etc/hadoop/mapred-site.xml.template /opt/hadoop-2.7.3/etc/hadoop/mapred-site.xml
+</code></pre>
+</div>
+
+<p>El archivo mapred-site.xml es usado para especificar cuál framework está siendo usado por MapReduce.</p>
+
+<p>Editamos <strong>/opt/hadoop-2.7.3/etc/hadoop/mapred-site.xml</strong>, abrir el archivo y cambiar lo siguiente entre el tag <code class="highlighter-rouge">&lt;configuration&gt; &lt;/configuration&gt;</code></p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;configuration&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>mapred.job.tracker<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>master:54311<span class="nt">&lt;/value&gt;</span>
+  <span class="nt">&lt;description&gt;</span>The host and port that the MapReduce job tracker runs
+  at<span class="nt">&lt;/description&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>mapreduce.framework.name<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>yarn<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre>
+</div>
+
+<p>Editamos <strong>/opt/hadoop-2.7.3/etc/hadoop/yarn-site.xml</strong>, abrir el archivo y cambiar lo siguiente entre el tag <code class="highlighter-rouge">&lt;configuration&gt; &lt;/configuration&gt;</code></p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;configuration&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>yarn.nodemanager.aux-services<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>mapreduce_shuffle<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>yarn.nodemanager.aux-services.mapreduce_shuffle.class<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>org.apache.hadoop.mapred.ShuffleHandler<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>yarn.resourcemanager.resource-tracker.address<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>master:8025<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>yarn.resourcemanager.scheduler.address<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>master:8030<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+ <span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>yarn.resourcemanager.address<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>master:8050<span class="nt">&lt;/value&gt;</span>
+ <span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre>
+</div>
+
+<p>Como hemos podido ver todas las configuraciones hechas en cada maquina apuntan al <strong>master</strong>, pero aun no le hemos indicado a hadoop quien sera master y quienes slaves.</p>
+
+<h4 id="configurando-hadoop-como-master-y-como-slave">Configurando Hadoop como Master y como Slave</h4>
+
+<h5 id="en-el-master">En el Master:</h5>
+
+<p>Pondremos el namenode en el Master.</p>
+
+<p>Editar el archivo <strong>/opt/hadoop-2.7.3/etc/hadoop/masters</strong>, si no existe se debe de crear, y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>master
+</code></pre>
+</div>
+<p>Pondremos al Master y a los Slaves como datanodes para que todas las maquinas realizen procesos.</p>
+
+<p>Editar el archivo <strong>/opt/hadoop-2.7.3/etc/hadoop/slaves</strong>, y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>master
+slave1
+slave2
+slave3
+</code></pre>
+</div>
+<h5 id="en-el-slave1">En el Slave1:</h5>
+
+<p>Editar el archivo <strong>/opt/hadoop-2.7.3/etc/hadoop/slaves</strong>, y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>slave1
+</code></pre>
+</div>
+<h5 id="en-el-slave2">En el Slave2:</h5>
+
+<p>Editar el archivo <strong>/opt/hadoop-2.7.3/etc/hadoop/slaves</strong>, y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>slave2
+</code></pre>
+</div>
+<h5 id="en-el-slave3">En el Slave3:</h5>
+
+<p>Editar el archivo <strong>/opt/hadoop-2.7.3/etc/hadoop/slaves</strong>, y cambiar su contenido por:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>slave3
+</code></pre>
+</div>
+
+<h4 id="iniciando-hadoop-multinode">Iniciando Hadoop MultiNode</h4>
+
+<h5 id="en-el-master-1">En el Master:</h5>
+
+<p>Formatear el Filesystem:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ hdfs namenode -format
+</code></pre>
+</div>
+
+<p>Iniciamos el hdfs</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ start-dfs.sh
+</code></pre>
+</div>
+
+<p>Verificamos que se inicio correctamente en:</p>
+<blockquote>
+  <p>192.168.1.240:50070</p>
+</blockquote>
+
+<p>Tambien podemos verificar ejecutando <code class="highlighter-rouge">$ jps</code> en cada maquina:</p>
+
+<ul>
+  <li>En el master deberia aparecer, algo similar:
+    <div class="highlighter-rouge"><pre class="highlight"><code>6539 ResourceManager
+6451 DataNode
+8701 Jps
+6895 JobHistoryServer
+6234 NameNode
+6765 NodeManager
+</code></pre>
+    </div>
+  </li>
+  <li>Y en los slaves deberia aparecer, algo similar:
+    <div class="highlighter-rouge"><pre class="highlight"><code>8014 NodeManager
+7858 DataNode
+9868 Jps
+</code></pre>
+    </div>
+  </li>
+</ul>
+
+<p>Iniciamos yarn</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ start-yarn.sh
+</code></pre>
+</div>
+
+<h4 id="generando-informacion-en-el-master">Generando informacion en el Master</h4>
+<p>Usaremos c++ para generar un archivo con informacion:</p>
+
+<p>El codigo lo podemos encontrar en <a href="https://github.com/juniorUsca/hadoop_examples">https://github.com/juniorUsca/hadoop_examples</a></p>
+
+<p>Lo descargamos con git y lo compilamos</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ git clone https://github.com/juniorUsca/hadoop_examples.git
+$ cd hadoop_examples/generate_data
+$ g++ main.cpp
+$ ./a.out
+</code></pre>
+</div>
+<p>Empezara a generar un archivo llamado <code class="highlighter-rouge">book.txt</code>, detenemos el script con las teclas:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>CTRL + C
+</code></pre>
+</div>
+
+<h4 id="subiendo-un-archivo-a-hdfs-en-el-master">Subiendo un Archivo a HDFS en el Master</h4>
+
+<p>Ahora subiremos el archivo <code class="highlighter-rouge">book.txt</code> al sistemas de archivos de Hadoop:</p>
+
+<p>Primero iniciaremos la carpeta del usuario hduser</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ hadoop fs -mkdir -p /user/hduser
+</code></pre>
+</div>
+<p>Subimos el archivo</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ hadoop fs -copyFromLocal book.txt book.txt
+</code></pre>
+</div>
+<p>Cuando termine de subir el archivo, podemos verificar que lo subio entrando a 192.168.1.240:50070/explorer.html#/user/hduser</p>
+
+<p><img src="https://github.com/juniorUsca/tutoriales/raw/master/hadoop/hadoop-multicluster/imgs/2016-09-15-233818_1366x768_scrot.png" alt="Image 2" /></p>
+
+<p>Ahora probaremos que toda la instalación anterior funciona de manera adecuada, ejecutar:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ hadoop jar /opt/hadoop-2.7.3/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.3.jar wordcount book.txt output
+</code></pre>
+</div>
+
+<p><img src="https://github.com/juniorUsca/tutoriales/raw/master/hadoop/hadoop-multicluster/imgs/2016-09-15-115303_1920x1080_scrot.png" alt="Image 3" /></p>
+
+<p>Al finalizar podemos ver los resultados con:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ hadoop fs -cat output/*
+</code></pre>
+</div>
+
+<h4 id="ejecutando-wordcount-y-wordmean">Ejecutando WordCount y WordMean</h4>
+
+<p>Ahora nosotros suponemos que se genero un archivo de 100GB llamado <code class="highlighter-rouge">book.txt</code>, y que fue ese el que se subio a HDFS.</p>
+
+<p>En el repositorio tambien hay dos ejemplos escritos en java, para probar que se puede usar hadoop MapReduce de la forma que mas nos sea util.</p>
+
+<p>Compilamos el codigo</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ cd hadoop_examples
+$ mkdir wordcount_classes
+$ mkdir wordmean_classes
+$ javac -classpath /opt/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar:/opt/hadoop-2.7.3/share/hadoop/common/lib/hadoop-annotations-2.7.3.jar:/opt/hadoop-2.7.3/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.3.jar -d wordcount_classes WordCount.java
+
+$ javac -classpath /opt/hadoop-2.7.3/share/hadoop/common/hadoop-common-2.7.3.jar:/opt/hadoop-2.7.3/share/hadoop/common/lib/hadoop-annotations-2.7.3.jar:/opt/hadoop-2.7.3/share/hadoop/mapreduce/hadoop-mapreduce-client-core-2.7.3.jar -d wordmean_classes WordMean.java
+$ jar -cvf WordCount.jar -C wordcount_classes/ . 
+$ jar -cvf WordMean.jar -C wordmean_classes/ . 
+</code></pre>
+</div>
+<p>Ejecutamos WordCount</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ hadoop jar WordCount.jar WordCount book.txt outputWC
+$ hadoop fs -cat outputWC/*
+</code></pre>
+</div>
+<p>Ejecutamos WordMean</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>$ hadoop jar WordMean.jar WordMean book.txt outputWM
+$ hadoop fs -cat outputWM/*
+</code></pre>
+</div>
+
+    </div>
+
+    
+
+  </section>
+
+
+
+              <!--
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Junior Usca</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Junior Usca
+            
+            </li>
+            
+            <li><a href="mailto:junior.usca@gmail.com">junior.usca@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/juniorUsca"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">juniorUsca</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+-->
+
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="inner">
+
+      <!-- Search -->
+        <section id="search" class="alt">
+          <form method="post" action="#">
+            <input type="text" name="query" id="query" placeholder="Buscar..." />
+          </form>
+        </section>
+
+      <!-- Menu -->
+		<nav id="menu">
+	      <header class="major">
+            <h2>Menu</h2>
+          </header>
+          <ul>
+            <li><a href="/">Inicio</a></li>
+            
+            
+
+            
+              
+              
+                <li><a href="/about/">About</a></li>
+              
+            
+              
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+              
+              
+            
+            <!--
+               - <li>
+               -   <span class="opener">Submenu</span>
+               -   <ul>
+               -     <li><a href="#">Lorem Dolor</a></li>
+               -     <li><a href="#">Ipsum Adipiscing</a></li>
+               -     <li><a href="#">Tempus Magna</a></li>
+               -     <li><a href="#">Feugiat Veroeros</a></li>
+               -   </ul>
+               - </li>
+               -->
+          </ul>
+        </nav>
+
+      <!-- Section -->
+        <!--
+           - <section>
+           -   <header class="major">
+           -     <h2>Ante interdum</h2>
+           -   </header>
+           -   <div class="mini-posts">
+           -     <article>
+           -       <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+           -       <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+           -     </article>
+           -     <article>
+           -       <a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+           -       <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+           -     </article>
+           -     <article>
+           -       <a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+           -       <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+           -     </article>
+           -   </div>
+           -   <ul class="actions">
+           -     <li><a href="#" class="button">More</a></li>
+           -   </ul>
+           - </section>
+           -->
+
+      <!-- Section -->
+        <section>
+          <header class="major">
+            <h2>Contactar</h2>
+          </header>
+          <p></p>
+          <ul class="contact">
+            
+            <li class="fa-envelope-o"><a href="mailto:junior.usca@gmail.com?Subject=Hi">junior.usca@gmail.com</a></li>
+            
+            
+            <li class="fa-phone">(+51) 935 088 511</li>
+            
+            
+            <li class="fa-home">Arequipa - Perú<br />
+J.L.B. y Ribero<br />
+</li>
+            
+          </ul>
+        </section>
+
+      <!-- Footer -->
+        <footer id="footer">
+          <p class="copyright">&copy; Junior Usca. All rights reserved. Modified by <a href="/">me</a>, Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a>.</p>
+        </footer>
+
+    </div>
+  </div>
+
+      </div>
+
+      <!-- Scripts -->
+  <script src="/assets/js/jquery.min.js"></script>
+  <script src="/assets/js/skel.min.js"></script>
+  <script src="/assets/js/util.js"></script>
+  <!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
+  <script src="/assets/js/main.js"></script>
+
+
+  </body>
+
+</html>

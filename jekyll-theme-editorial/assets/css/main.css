@@ -1665,7 +1665,7 @@ h2 {
   font-size: 1.75em; }
 
 h3 {
-  font-size: 1.25em; }
+  font-size: 1.45em; }
 
 h4 {
   font-size: 1.1em; }
@@ -1966,6 +1966,12 @@ input[type="radio"] + label:before {
     font-family: 'devicon'; }
 
 /* Image */
+img {
+  max-width: 100%; }
+
+.highlighter-rouge {
+  max-width: 100%; }
+
 .image {
   border-radius: 0.375em;
   border: 0;
@@ -2595,7 +2601,7 @@ button,
   -webkit-flex-shrink: 1;
   -ms-flex-shrink: 1;
   flex-shrink: 1;
-  width: 100%; }
+  width: 0; }
   #main > .inner {
     padding: 0 6em 0.1em 6em ;
     margin: 0 auto;
