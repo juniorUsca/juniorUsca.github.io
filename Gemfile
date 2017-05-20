@@ -35,3 +35,6 @@ gem 'jekyll-paginate'
 
 # First image gem
 gem 'jekyll-auto-image'
+
+# Site map gem
+gem 'jekyll-sitemap'

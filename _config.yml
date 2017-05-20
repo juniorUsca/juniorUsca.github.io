@@ -9,9 +9,9 @@ twitter_username:
 facebook_username: junior.usca
 github_username: juniorUsca
 description: |
-  Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+  Mi blog personal en español sobre lo que hago en mis estudios y en mi trabajo.
+url: https://juniorusca.github.io
 baseurl: ''
-url: https://juniorusca.github.io/
 encoding: utf-8
 timezone: America/Lima
 markdown: kramdown
@@ -24,6 +24,7 @@ gems:
 - jekyll-feed
 - jekyll-paginate
 - jekyll-auto-image
+- jekyll-sitemap
 exclude:
 - Gemfile
 - Gemfile.lock
