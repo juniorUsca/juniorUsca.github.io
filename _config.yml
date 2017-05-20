@@ -20,6 +20,8 @@ paginate: 6
 paginate_first_path: "/blog/"
 paginate_path: "/blog/page:num/"
 image: https://juniorusca.github.io/images/default.jpg
+disqus:
+  shortname: juniorusca
 gems:
 - jekyll-feed
 - jekyll-paginate

@@ -17,6 +17,9 @@ layout: default
           <p>{{ post.date | date: date_format }}</p>
         </header>
         <p>{{ post.excerpt | strip_html | remove: '<p>' | remove: '</p>' }}</p>
+        {% if site.disqus.shortname %}
+        <a class="comments" href="{{ post.url | absolute_url }}#disqus_thread">{{ post.title | escape }}</a>
+        {% endif %}
         <ul class="actions">
           <li><a href="{{ post.url | relative_url }}" class="button big">Ver más</a></li>
         </ul>
@@ -109,6 +112,9 @@ layout: default
           {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
           <span class="post-meta">{{ post.date | date: date_format }}</span>
           <p>{{ post.excerpt | strip_html | truncate: 183 }}</p>
+          {% if site.disqus.shortname %}
+          <a class="comments" href="{{ post.url | absolute_url }}#disqus_thread">{{ post.title | escape }}</a>
+          {% endif %}
           <ul class="actions">
             <li><a href="{{ post.url | relative_url }}" class="button">Ver más</a></li>
           </ul>
