@@ -2521,6 +2521,9 @@ button,
       .posts article .image img {
         display: block;
         width: 100%; }
+    .posts article .comments {
+      margin: 0 0 1em 0;
+      display: inline-block; }
   @media screen and (min-width: 1681px) {
     .posts article:nth-child(3n + 1):before {
       display: none; }
@@ -2855,6 +2858,9 @@ button,
   display: flex; }
   #banner h1 {
     margin-top: -0.125em; }
+  #banner .comments {
+    margin: 0 0 1em 0;
+    display: inline-block; }
   #banner .content {
     -moz-flex-grow: 1;
     -webkit-flex-grow: 1;

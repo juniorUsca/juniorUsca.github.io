@@ -6,7 +6,7 @@
 
 ```bundle install```
 
-```bundle exec jekyll serve```
+```JEKYLL_ENV=production jekyll serve```
 
 ```cd _site```
 

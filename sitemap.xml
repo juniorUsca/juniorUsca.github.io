@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://juniorusca.github.io/2016/11/08/configurar-virtualbox-para-ingresar-con-ssh-e-ip-estatica.html</loc>
+<lastmod>2016-11-08T12:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://juniorusca.github.io/2016/11/08/instalacion-de-hadoop-273-en-ubuntu-1404.html</loc>
+<lastmod>2016-11-08T12:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://juniorusca.github.io/jekyll/update/2017/05/05/welcome-to-jekyll.html</loc>
+<lastmod>2017-05-05T04:30:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://juniorusca.github.io/2017/05/10/arreglar-13-permission-denied-en-apache-con-php.html</loc>
+<lastmod>2017-05-10T12:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://juniorusca.github.io/2017/05/13/generando-un-csr-con-openssl.html</loc>
+<lastmod>2017-05-13T12:00:00-05:00</lastmod>
+</url>
+<url>
+<loc>https://juniorusca.github.io/about/</loc>
+</url>
+<url>
+<loc>https://juniorusca.github.io/blog/</loc>
+</url>
+<url>
+<loc>https://juniorusca.github.io/</loc>
+</url>
+</urlset>
