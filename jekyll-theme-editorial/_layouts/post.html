@@ -13,6 +13,13 @@ layout: default
             {{ page.date | date: date_format }}
           </time>
         </li>
+        {% if page.tags %}
+          <li>
+            <span itemprop="tags">
+              Tags: {{ page | tags }}
+            </span>
+          </li>
+        {% endif %}
         {% if page.author %}
           <li>
             <span itemprop="author" itemscope itemtype="http://schema.org/Person">
