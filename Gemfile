@@ -38,3 +38,6 @@ gem 'jekyll-auto-image'
 
 # Site map gem
 gem 'jekyll-sitemap'
+
+# Tags pages gem
+gem 'jekyll-tagging'

@@ -1,0 +1,44 @@
+{% assign raw_tags = "" | split: ""  %}
+{% assign tags_count = "" | split: "" %}
+{% for post in site.posts %}
+  {% if post.tags[0] %}
+    {% for post_tag in post.tags %}
+      {% assign it = 0 %}
+      {% assign flag = 0 %}
+      {% for raw_tag in raw_tags %}
+        {% if post_tag == raw_tag %}
+          {% assign tags_count_buffer_end = "" | split: "" %}
+          {% assign temp_it = tags_count | size | minus: it %}
+          {% assign tags_count_buffer = tags_count | pop: temp_it %}
+          {% for tmp in tags_count_buffer %}
+            {% assign tags_count_buffer_end = tags_count_buffer_end | push: tmp %}
+          {% endfor %}
+          {% assign temp_cont = tags_count[it] | plus: 1 %}
+          {% assign tags_count_buffer_end = tags_count_buffer_end | push: temp_cont %}
+          {% assign temp_it = it | plus: 1 %}
+          {% assign tags_count_buffer = tags_count | shift: temp_it %}
+          {% for tmp in tags_count_buffer %}
+            {% assign tags_count_buffer_end = tags_count_buffer_end | push: tmp %}
+          {% endfor %}
+          {% assign tags_count = tags_count_buffer_end %}
+          {% assign flag = 1 %}
+          {% break %}
+        {% endif %}
+        {% assign it = it | plus: 1 %}
+      {% endfor %}
+      {% if flag == 0 %}
+        {% assign tags_count = tags_count | push: 1 %}
+        {% assign raw_tags = raw_tags | push: post_tag %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% assign size_1 = raw_tags | size | minus:2 %}
+<p style="margin: 0;">
+{% for i in (0..size_1) %}
+  <a href="/{{ site.baseurl }}tag/{{ raw_tags[i] }}">{{ raw_tags[i] }}({{ tags_count[i] }})</a>, 
+{% endfor %}
+{% assign i = raw_tags | size | minus:1 %}
+  <a href="/{{ site.baseurl }}tag/{{ raw_tags[i] }}">{{ raw_tags[i] }}({{ tags_count[i] }})</a>
+</p>

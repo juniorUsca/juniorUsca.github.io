@@ -3,6 +3,8 @@ title: Encontrar los Archivos Conteniendo un Texto en Particular en la Consola L
 layout: post
 date: '2017-05-17 12:00:00'
 banner_image: no_image
+tags:
+- ssh
 ---
 
 ---

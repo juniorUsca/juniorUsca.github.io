@@ -3,6 +3,10 @@ title: Instalación de Hadoop 2.7.3 en Ubuntu 14.04
 layout: post
 date: '2016-11-08 12:00:00'
 banner_image: no_image
+tags:
+- hadoop
+- ubuntu
+- ssh
 ---
 
 ---

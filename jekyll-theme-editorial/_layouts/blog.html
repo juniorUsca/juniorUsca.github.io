@@ -5,38 +5,7 @@ layout: default
 {{ content }}
 
 {% if paginator and paginator.page==1 %}
-<!-- Banner -->
-  <section id="banner">
-    {% assign posts_size = site.posts | size | minus:1 %}
-    {% assign post = site.posts[ posts_size ] %}
-    {% assign post = site.posts | first %}
-    {% if paginator %}
-      {% assign post = paginator.posts | first %}
-    {% endif %}
-    {% if post %}
-      <div class="content">
-        <header>
-          <h1>{{ post.title | escape }}</h1>
-          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-          <p>{{ post.date | date: date_format }}</p>
-        </header>
-        <p>{{ post.excerpt | strip_html | remove: '<p>' | remove: '</p>' }}</p>
-        <footer>
-          {% if site.disqus.shortname %}
-          <a class="comments" href="{{ post.url | absolute_url }}#disqus_thread">{{ post.title | escape }}</a>
-          {% endif %}
-          <ul class="actions">
-            <li><a href="{{ post.url | relative_url }}" class="button big">Ver más</a></li>
-          </ul>
-        </footer>
-      </div>
-      {% if post.image != "no_image" %}
-        <span class="image object">
-          <a href="{{ post.url | relative_url }}"><img src="{{ post.image }}" alt="{{ post.title | escape }}" /></a>
-        </span>
-      {% endif %}
-    {% endif %}
-  </section>
+  {% include post_banner.html %}
 {% endif %}
 
 <!-- Section -->
@@ -52,25 +21,7 @@ layout: default
         {% assign off_set = 0 %}
       {% endif %}
       {% for post in paginator.posts offset:off_set %}
-        <article>
-          {% if post.image == "no_image" %}
-            <a href="{{ post.url | relative_url }}" class="image"><img src="{{ site.image }}" alt="{{ post.title | escape }}" /></a>
-          {% else %}
-            <a href="{{ post.url | relative_url }}" class="image"><img src="{{ post.image }}" alt="{{ post.title | escape }}" /></a>
-          {% endif %}
-          <h3>{{ post.title | escape }}</h3>
-          {% assign date_format = "%b %-d, %Y" | default: "%b %-d, %Y" %}
-          <span class="post-meta">{{ post.date | date: date_format }}</span>
-          <p>{{ post.excerpt | strip_html | truncate: 183 }}</p>
-          <footer>
-            {% if site.disqus.shortname %}
-            <a class="comments" href="{{ post.url | absolute_url }}#disqus_thread">{{ post.title | escape }}</a>
-            {% endif %}
-            <ul class="actions">
-              <li><a href="{{ post.url | relative_url }}" class="button">Ver más</a></li>
-            </ul>
-          </footer>
-        </article>
+        {% include post_article.html %}
       {% endfor %}
     </div>
 

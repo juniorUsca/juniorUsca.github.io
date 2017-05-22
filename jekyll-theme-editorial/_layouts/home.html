@@ -4,35 +4,7 @@ layout: default
 
 {{ content }}
 
-<!-- Banner -->
-  <section id="banner">
-    {% assign posts_size = site.posts | size | minus:1 %}
-    {% assign post = site.posts[ posts_size ] %}
-    {% assign post = site.posts | first %}
-    {% if post %}
-      <div class="content">
-        <header>
-          <h1>{{ post.title | escape }}</h1>
-          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-          <p>{{ post.date | date: date_format }}</p>
-        </header>
-        <p>{{ post.excerpt | strip_html | remove: '<p>' | remove: '</p>' }}</p>
-        <footer>
-          {% if site.disqus.shortname %}
-          <a class="comments" href="{{ post.url | absolute_url }}#disqus_thread">{{ post.title | escape }}</a>
-          {% endif %}
-          <ul class="actions">
-            <li><a href="{{ post.url | relative_url }}" class="button big">Ver más</a></li>
-          </ul>
-        </footer>
-      </div>
-      {% if post.image != "no_image" %}
-        <span class="image object">
-          <a href="{{ post.url | relative_url }}"><img src="{{ post.image }}" alt="{{ post.title | escape }}" /></a>
-        </span>
-      {% endif %}
-    {% endif %}
-  </section>
+{% include post_banner.html %}
 
 <!-- Section -->
   <section>
@@ -106,23 +78,7 @@ layout: default
     </header>
     <div class="posts">
       {% for post in site.posts offset:1 limit:6 %}
-        <article>
-          {% if post.image != "no_image" %}
-            <a href="{{ post.url | relative_url }}" class="image"><img src="{{ post.image }}" alt="{{ post.title | escape }}" /></a>
-          {% endif %}
-          <h3>{{ post.title | escape }}</h3>
-          {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-          <span class="post-meta">{{ post.date | date: date_format }}</span>
-          <p>{{ post.excerpt | strip_html | truncate: 183 }}</p>
-          <footer>
-            {% if site.disqus.shortname %}
-            <a class="comments" href="{{ post.url | absolute_url }}#disqus_thread">{{ post.title | escape }}</a>
-            {% endif %}
-            <ul class="actions">
-              <li><a href="{{ post.url | relative_url }}" class="button">Ver más</a></li>
-            </ul>
-          </footer>
-        </article>
+        {% include post_article.html %}
       {% endfor %}
     </div>
   </section>

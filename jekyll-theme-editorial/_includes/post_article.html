@@ -1,0 +1,23 @@
+
+        <article>
+          {% if post.image == "no_image" %}
+            <a href="{{ post.url | relative_url }}" class="image"><img src="{{ site.image }}" alt="{{ post.title | escape }}" /></a>
+          {% else %}
+            <a href="{{ post.url | relative_url }}" class="image"><img src="{{ post.image }}" alt="{{ post.title | escape }}" /></a>
+          {% endif %}
+          <h3>{{ post.title | escape }}</h3>
+          {% assign date_format = "%b %-d, %Y" | default: "%b %-d, %Y" %}
+          <span class="post-meta">{{ post.date | date: date_format }}</span>
+          {% if post.tags and post.tags[0] %}
+          | Tags: <span class="post-meta">{{ post | tags }}</span>
+          {% endif %}
+          <p>{{ post.excerpt | strip_html | truncate: 183 }}</p>
+          <footer>
+            {% if site.disqus.shortname %}
+            <a class="comments" href="{{ post.url | absolute_url }}#disqus_thread">{{ post.title | escape }}</a>
+            {% endif %}
+            <ul class="actions">
+              <li><a href="{{ post.url | relative_url }}" class="button">Ver más</a></li>
+            </ul>
+          </footer>
+        </article>
