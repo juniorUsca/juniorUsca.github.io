@@ -2521,7 +2521,7 @@ button,
       .posts article .image img {
         display: block;
         width: 100%; }
-    .posts article .comments {
+    .posts article .comments, .posts article .post-meta {
       margin: 0 0 1em 0;
       display: inline-block; }
   @media screen and (min-width: 1681px) {
