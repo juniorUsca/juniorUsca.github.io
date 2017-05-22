@@ -4,7 +4,7 @@ layout: post
 banner_image: no_image
 tags: mysql mariadb memory error
 date: '2017-05-22 05:06:33'
-image: https://juniorusca.github.io/2017/05/22/mysql-se-detiene-frecuentemente/mariadb-icon.png
+image: https://juniorusca.github.io/images/2017/05/22/mysql-se-detiene-frecuentemente/mariadb-icon.png
 ---
 
 ---
